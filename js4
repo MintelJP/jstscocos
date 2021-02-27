@@ -1,0 +1,227 @@
+
+
+ES6新增语法
+
+let
+
+ES6中新增了用于声明变量的关键字
+
+let声明的变量只在所处于的块级有效
+
+
+ if (true) { 
+     let a = 10;
+ }
+console.log(a) // a is not defined
+
+
+使用let关键字声明的变量才具有块级作用域
+使用var声明的变量不具备块级作用域特性
+
+
+不存在变量提升
+
+
+console.log(a); // a is not defined 
+let a = 20;
+
+
+暂时性死区
+
+利用let声明的变量会绑定在这个块级作用域，不会受外界的影响
+
+
+ var tmp = 123;
+ if (true) { 
+     tmp = 'abc';
+     let tmp; 
+ } 
+
+
+面试题
+
+
+ var arr = [];
+ for (var i = 0; i < 2; i++) {
+     arr[i] = function () {
+         console.log(i); 
+     }
+ }
+ arr[0]();
+ arr[1]();
+
+
+
+函数执行时输出的都是全局作用域下的i值
+
+
+ let arr = [];
+ for (let i = 0; i < 2; i++) {
+     arr[i] = function () {
+         console.log(i); 
+     }
+ }
+ arr[0]();
+ arr[1]();
+
+每次循环都会产生一个块级作用域，每个块级作用域中的变量都是不同的，函数执行时输出的是自己上一级（循环产生的块级作用域）作用域下的i值.
+
+小结
+
+let关键字就是用来声明变量的
+使用let关键字声明的变量具有块级作用域
+在一个大括号中 使用let关键字声明的变量才具有块级作用域 var关键字是不具备这个特点的
+防止循环变量变成全局变量
+使用let关键字声明的变量没有变量提升
+使用let关键字声明的变量具有暂时性死区特性
+
+
+
+
+const
+
+声明常量，常量就是值（内存地址）不能变化的量
+
+具有块级作用域
+
+
+ if (true) { 
+     const a = 10;
+ }
+console.log(a) 
+
+
+声明常量时必须赋值
+
+
+const PI; 
+
+
+常量赋值后，值不能修改
+
+
+const PI = 3.14;
+PI = 100; 
+
+const ary = [100, 200];
+ary[0] = 'a';
+ary[1] = 'b';
+console.log(ary); 
+ary = ['a', 'b']; 
+
+
+小结
+
+- const声明的变量是一个常量
+- 既然是常量不能重新进行赋值，如果是基本数据类型，不能更改值，如果是复杂数据类型，不能更改地址值
+- 声明 const时候必须要给定值
+
+let、const、var 的区别
+
+使用 var 声明的变量，其作用域为该语句所在的函数内，且存在变量提升现象
+使用 let 声明的变量，其作用域为该语句所在的代码块内，不存在变量提升
+使用 const 声明的是常量，在后面出现的代码中不能再修改该常量的值
+
+
+
+解构赋值
+
+ES6中允许从数组中提取值，按照对应位置，对变量赋值，对象也可以实现解构
+
+数组解构
+
+
+ let [a, b, c] = [1, 2, 3];
+ console.log(a)//1
+ console.log(b)//2
+ console.log(c)//3
+//如果解构不成功，变量的值为undefined
+
+
+对象解构
+
+
+ let person = { name: 'zhangsan', age: 20 }; 
+ let { name, age } = person;
+ console.log(name); 
+ console.log(age); 
+
+ let {name: myName, age: myAge} = person; 
+ console.log(myName); 
+ console.log(myAge); 
+
+
+小结
+
+解构赋值就是把数据结构分解，然后给变量进行赋值
+如果结构不成功，变量跟数值个数不匹配的时候，变量的值为undefined
+数组解构用中括号包裹，多个变量用逗号隔开，对象解构用花括号包裹，多个变量用逗号隔开
+利用解构赋值能够让我们方便的去取对象中的属性跟方法
+
+箭头函数
+
+
+
+() => {} //()：代表是函数； =>：必须要的符号，指向哪一个代码块；{}：函数体
+const fn = () => {}//代表把一个函数赋值给fn
+```
+
+
+
+
+ function sum(num1, num2) { 
+     return num1 + num2; 
+ }
+
+ const sum = (num1, num2) => num1 + num2; 
+
+
+
+如果形参只有一个，可以省略小括号
+
+```javascript
+ function fn (v) {
+     return v;
+ } 
+
+ const fn = v => v;
+
+
+
+箭头函数不绑定this关键字，箭头函数中的this，指向的是函数定义位置的上下文this
+
+
+const obj = { name: '张三'} 
+ function fn () { 
+     console.log(this);//this 指向 是obj对象
+     return () => { 
+         console.log(this);//this 指向 的是箭头函数定义的位置，
+     } 
+ } 
+ const resFn = fn.call(obj); 
+ resFn();
+
+
+
+小结
+
+箭头函数中不绑定this，箭头函数中的this指向是它所定义的位置，可以简单理解成，定义箭头函数中的作用域的this指向谁，它就指向谁
+箭头函数的优点在于解决了this执行环境所造成的一些问题。比如：解决了匿名函数this指向的问题（匿名函数的执行环境具有全局性），包括setTimeout和setInterval中使用this所造成的问题
+
+
+
+
+var age = 100;
+
+var obj = {
+	age: 20,
+	say: () => {
+		alert(this.age)
+	}
+}
+
+obj.say();
+
+
+
+

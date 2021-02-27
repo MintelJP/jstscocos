@@ -1,0 +1,129 @@
+Boolean  布尔值
+最基础的数据类型就是简单的 true(真)/false(假) 
+
+    var isDone: boolean = false;
+
+
+Number 数字
+
+	var decLiteral: number = 6;
+	var hexLiteral: number = 0x9837abdef;
+	var binaryLiteral: number = 0b0010;
+	var octalLiteral: number = 0o74563;
+
+String 字符串
+
+	var name: string = "bob";
+	name = 'smith';
+
+	var name: string = `Gene`;
+	var age: number = 37;
+	var sentence: string = `Hello, my name is ${ name }.
+
+	I'll be ${ age + 1 } years old next month.
+
+
+
+ 
+Array 数组
+
+	var list: number[] = [1, 2, 3];
+
+
+Enum 枚举
+	enum Color {Red, Green, Blue};
+	var c: Color = Color.Green;
+	enum Direction {
+    Up = 1,
+    Down,
+    Left,
+    Right
+}
+
+
+Any
+
+	var notSure: any = 4;
+	notSure = "maybe a string instead";
+	notSure = false; 
+	
+Void
+	function warnUser(): void {
+    alert("This is my warning message");
+   }
+	
+类	
+	
+	class Greeter {
+		greeting: string;
+		constructor(message: string) {
+			this.greeting = message;
+		}
+		greet() {
+			return "Hello, " + this.greeting;
+		}
+	}
+
+	var greeter = new Greeter("world");
+		
+	
+继承	
+	
+	class Animal {
+    name:string;
+    constructor(theName: string) { this.name = theName; }
+    move(distanceInMeters: number = 0) {
+        console.log(`${this.name} moved ${distanceInMeters}m.`);
+    }
+	}	
+
+	class Snake extends Animal {
+		constructor(name: string) { super(name); }
+		move(distanceInMeters = 5) {
+			console.log("Slithering...");
+			super.move(distanceInMeters);
+		}
+	}
+
+	class Horse extends Animal {
+		constructor(name: string) { super(name); }
+		move(distanceInMeters = 45) {
+			console.log("Galloping...");
+			super.move(distanceInMeters);
+		}
+	}
+
+	var sam = new Snake("Sammy the Python");
+	var tom: Animal = new Horse("Tommy the Palomino");
+	sam.move();
+    tom.move(34);
+	
+接口
+	interface IPerson { 
+    firstName:string, 
+    lastName:string, 
+    sayHi: ()=>string 
+	}
+ 
+	var customer:IPerson = { 
+		firstName:"Tom",
+		lastName:"Hanks", 
+		sayHi: ():string =>{return "Hi there"} 
+	} 
+	 
+	console.log("Customer 对象 ") 
+	console.log(customer.firstName) 
+	console.log(customer.lastName) 
+	console.log(customer.sayHi())  
+	 
+	var employee:IPerson = { 
+		firstName:"Jim",
+		lastName:"Blakes", 
+		sayHi: ():string =>{return "Hello!!!"} 
+	} 
+	 
+	console.log("Employee  对象 ") 
+	console.log(employee.firstName) 
+	console.log(employee.lastName)
+
+	
